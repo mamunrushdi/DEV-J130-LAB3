@@ -3,6 +3,8 @@ package lab3;
 public class Warehouse {
     private static int totalItems;
 
+    private static boolean needToFill = true;
+
     public synchronized static int getTotalItems() {
         return totalItems;
     }
@@ -15,5 +17,15 @@ public class Warehouse {
 
     public synchronized static void addItem(int n) {
         totalItems = totalItems + n;
+        Warehouse.setNeedToFill(false);
+    }
+
+
+    public  static boolean isNeedToFill() {
+        return needToFill;
+    }
+
+    public synchronized static void setNeedToFill(boolean needToFill) {
+        Warehouse.needToFill = needToFill;
     }
 }

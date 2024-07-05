@@ -7,15 +7,15 @@ public class Consumer {
         Thread.sleep(ThreadLocalRandom.current().nextInt(800, 1000));
         int item = ThreadLocalRandom.current().nextInt(1, 3);
         while(Warehouse.getTotalItems() < item){
+            Warehouse.setNeedToFill(true);
+            // Notify the producer
+            notify();
+            System.out.println(Thread.currentThread().getName() +  " is waiting");
             wait();
-            System.out.printf(Thread.currentThread().getName() +  " is waiting");
         }
         // consume item
         Warehouse.consumeItem(item);
         System.out.printf(Thread.currentThread().getName() +  " consumed %d item.\n", item);
-
-        // Notify the producer
-        notify();
 
         Thread.sleep(ThreadLocalRandom.current().nextInt(800, 1000));
     }

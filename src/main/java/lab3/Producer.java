@@ -5,7 +5,7 @@ import java.util.concurrent.ThreadLocalRandom;
 public class Producer {
     public synchronized void produce() throws InterruptedException {
         Thread.sleep(ThreadLocalRandom.current().nextInt(800, 1000));
-        while (Warehouse.getTotalItems() != 0) {
+        while (!Warehouse.isNeedToFill()){
             wait();
             System.out.printf(Thread.currentThread().getName() +  " went to sleep.");
 

@@ -3,7 +3,7 @@ package lab3;
 public class Main {
 
     public static void main(String[] args) {
-
+        System.out.println("App started ...");
         for (int i = 0; i < 3; i++) {
             Thread producer = new Thread(
                     new Runnable() {
